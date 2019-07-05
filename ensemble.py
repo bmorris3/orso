@@ -9,18 +9,16 @@ import sys
 spot_contrast = 0.7
 u_ld = [0.5079, 0.2239]
 
-#n_spots = 14 # half solar max
+# n_spots = 14 # half solar max
 
-#n_spots = 28 # solar max
-
-n_spots = 100 * 28 # more than solar max
+n_spots = 14 * 100 # solar max
 
 inc_stellar = 90 * u.deg
 
 planet = TransitParams()
 planet.per = 5
 planet.a = 15
-planet.rp = 0.1
+planet.rp = 0.058330305324663184
 planet.w = 90
 planet.ecc = 0
 planet.t0 = 0
@@ -49,7 +47,8 @@ for i in range(n_iterations):
     # Draw spot latitude and radius from actual sunspot distributions
     lons = 360 * np.random.rand(n_spots)[:, np.newaxis] * u.deg
     lats = draw_random_sunspot_latitudes(n_spots)[:, np.newaxis] 
-    radii = draw_random_sunspot_radii(n_spots)[:, np.newaxis]
+    radii = 0.04 * np.ones(n_spots)[:, np.newaxis]
+    #radii = draw_random_sunspot_radii(n_spots)[:, np.newaxis]
 
     # Model transit light curve
     lcs, spots_occulted = star.light_curve(lons, lats, radii, inc_stellar, planet=planet, 
@@ -64,5 +63,7 @@ for i in range(n_iterations):
         residuals /= np.polyval(np.polyfit(times, residuals, 1), times)
 
         residual_ptp.append(residuals.ptp())
+    else: 
+        residual_ptp.append(0)
         
 np.save('data/residuals_{0:09d}.npy'.format(int(np.random.rand()*1e9)),residual_ptp)
