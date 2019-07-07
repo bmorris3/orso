@@ -11,7 +11,7 @@ u_ld = [0.5079, 0.2239]
 
 # n_spots = 14 # half solar max
 
-n_spots = 14 * 100 # solar max
+n_spots = 28 #14 * 100 # solar max
 
 inc_stellar = 90 * u.deg
 
@@ -47,8 +47,8 @@ for i in range(n_iterations):
     # Draw spot latitude and radius from actual sunspot distributions
     lons = 360 * np.random.rand(n_spots)[:, np.newaxis] * u.deg
     lats = draw_random_sunspot_latitudes(n_spots)[:, np.newaxis] 
-    radii = 0.04 * np.ones(n_spots)[:, np.newaxis]
-    #radii = draw_random_sunspot_radii(n_spots)[:, np.newaxis]
+#     radii = 0.04 * np.ones(n_spots)[:, np.newaxis]
+    radii = 0.02 + (0.09 - 0.02)*np.random.randn(n_spots)[:, np.newaxis] 
 
     # Model transit light curve
     lcs, spots_occulted = star.light_curve(lons, lats, radii, inc_stellar, planet=planet, 
