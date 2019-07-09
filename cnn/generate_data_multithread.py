@@ -24,7 +24,7 @@ star = Star(spot_contrast=0., u_ld=u_ld, rotation_period=26)
 
 koi_stdevs = np.load('../data/oot_scatter.npy')
 
-n_transits = 500
+n_transits = 1000
 transits = []
 residuals = []
 spots_occulted = []
@@ -70,7 +70,8 @@ while len(transits) < n_transits:
                 n_spots = 50
             else: 
                 n_spots = 0
-            spot_lons, spot_lats, spot_radii, inc_stellar = generate_spots(-90, 90, 0.1, n_spots, inclinations=90*u.deg)
+            #spot_lons, spot_lats, spot_radii, inc_stellar = generate_spots(-90, 90, 0.1, n_spots, inclinations=90*u.deg)
+            spot_lons, spot_lats, spot_radii, inc_stellar = generate_spots(-90, 90, 0.04, n_spots, inclinations=90*u.deg)
             lc, so = star.light_curve(spot_lons, spot_lats, spot_radii,
                                       inc_stellar, planet=params, times=times, 
                                       return_spots_occulted=True, fast=True)
