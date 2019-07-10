@@ -1,5 +1,8 @@
 # orso
 
-![bear print](https://image.flaticon.com/icons/svg/1/1274.svg)
+Occurrence rates of spot occultations. A work in progress! 
 
-Occurrence rates of spot occultations 
+
+
+![bear print](https://www.svgrepo.com/show/21475/bear.svg)
+
